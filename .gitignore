@@ -19,7 +19,6 @@
 .env.test.local
 .env.production.local
 
-/database/database.js
 /uploads
 
 npm-debug.log*
