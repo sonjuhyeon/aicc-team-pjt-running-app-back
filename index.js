@@ -1,6 +1,7 @@
 const express = require("express"); // express 모듈 불러오기
 const cors = require("cors"); // cors 모듈 불러오기
 const cookieParser = require("cookie-parser");
+require("dotenv").config();
 
 const PORT = 8080;
 
