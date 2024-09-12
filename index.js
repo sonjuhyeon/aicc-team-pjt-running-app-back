@@ -7,7 +7,7 @@ const PORT = 8080;
 const app = express(); // express 모듈을 사용하기 위해 app 변수에 할당
 app.use(
   cors({
-    origin: "https://aiccrunningapp.microdeveloper.co.kr",
+    origin: "https://runningapp.microdeveloper.co.kr",
     credentials: true,
   })
 );
