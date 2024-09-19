@@ -23,8 +23,14 @@ exports.updateViewCount = async (req, res) => {
     return res.status(200).json({ message: "View count updated successfully" });
   } catch (error) {
     await client.query("ROLLBACK"); // 에러 발생 시 롤백
-    console.error("Database error:", error); // 서버 로그에 에러 메시지 출력
-    return res.status(500).json({ error: error.message });
+    console.log(error);
+    if (error.code === "23505") {
+      console.error("Duplicate entry error: ", error.message);
+      return;
+    } else {
+      console.error("Database error:", error); // 서버 로그에 에러 메시지 출력
+      return res.status(500).json({ error: error.message });
+    }
   } finally {
     client.release(); // 데이터베이스 클라이언트 반환
   }

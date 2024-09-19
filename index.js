@@ -10,7 +10,7 @@ const app = express(); // express 모듈을 사용하기 위해 app 변수에 �
 // app.use(cors());
 app.use(
   cors({
-    origin: process.env.REACT_APP_MY_DOMAIN,
+    origin: `${process.env.REACT_APP_MY_DOMAIN}`,
     credentials: true,
   })
 );
