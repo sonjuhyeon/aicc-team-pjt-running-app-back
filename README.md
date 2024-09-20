@@ -8,19 +8,19 @@
 ---
 
 ### 1. 팀소개
-- 김민식(팀장)
+- 팀장
   - kakao map api를 이용하여 맵과 관련된 핵심 기능들을 구현
   - 의뢰받은 팀과의 커뮤니케이션, 조율 등 프로젝트 전반을 관리
-  - [민식님의 깃헙](https://github.com/Noveled)
-  - [민식님의 블로그](https://siina.tistory.com)
-- 손주현(팀원, 본인)
+  - [팀장 깃헙](https://github.com/Noveled)
+  - [팀장의 블로그](https://siina.tistory.com)
+- 팀원1(본인)
   - 로그인, 로그아웃 기능 구현
   - 추천코스, 보관함 기능 및 UI 구현
   - [나의 블로그](https://velog.io/@homeless_snail/posts)
-- 강민주(팀원)
+- 팀원2
   - 마이페이지 구현
   - 프로젝트의 전반적인 디자인 구성
-  - [민주님의 깃헙](https://github.com/mjk2024-dementia)
+  - [팀원2의 깃헙](https://github.com/mjk2024-dementia)
 
 ---
 
