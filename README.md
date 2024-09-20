@@ -25,9 +25,9 @@
 ---
 
 ### 2. 프로젝트에 사용한 기술
-- FrontEnd: JavaScript, React
-- BackEnd: Node.js
-- DB: postgreSql
+<img src="https://img.shields.io/badge/JavaScript-black?style=for-the-badge&logo=JavaScript&logoColor={로고 색깔}"/> <img src="https://img.shields.io/badge/React-black?style=for-the-badge&logo=react&logoColor={로고 색깔}"/><br>
+<img src="https://img.shields.io/badge/Node.js-black?style=for-the-badge&logo=nodedotjs&logoColor={로고 색깔}"/><br>
+<img src="https://img.shields.io/badge/PostgreSQL-black?style=for-the-badge&logo=postgresql&logoColor={로고 색깔}"/>
 
 ---
 
