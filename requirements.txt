@@ -6,3 +6,4 @@ openai>=1.48.0
 faiss-cpu>=1.8.0.post1
 python-dotenv>=1.0.1
 tiktoken>=0.7.0
+langchain-teddynote>=0.0.34
