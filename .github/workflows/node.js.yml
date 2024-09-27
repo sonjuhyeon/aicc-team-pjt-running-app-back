@@ -27,4 +27,24 @@ jobs:
       - run: |
           touch .env
           echo "${{ secrets.PRODUCTION_ENV_SECRET }}" > .env
+          echo "${{ secrets.OPENAI_API_KEY }}" >> .env
+
+      # Set up Python environment
+      - name: Set up Python 3.12.6
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.12.6"
+
+      # Create and activate Python virtual environment
+      - name: Set up Python virtual environment
+        run: |
+          python -m venv venv
+          source venv/bin/activate
+
+      # Install Python dependencies (if you have a requirements.txt file)
+      - name: Install Python dependencies
+        run: |
+          source venv/bin/activate
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+
       - run: pm2 restart BackendAPI
