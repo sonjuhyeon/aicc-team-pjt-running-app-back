@@ -11,11 +11,11 @@ const PORT = 8080;
 const app = express(); // express 모듈을 사용하기 위해 app 변수에 할당
 app.use(bodyParser.json());
 
-// Express 앱을 HTTP 서버로 감싸기
-const server = http.createServer(app);
+// // Express 앱을 HTTP 서버로 감싸기
+// const server = http.createServer(app);
 
-// 타임아웃 설정 (예: 5분)
-server.timeout = 300000; // 300,000ms = 300초 = 5분
+// // 타임아웃 설정 (예: 5분)
+// server.timeout = 300000; // 300,000ms = 300초 = 5분
 
 app.use(express.json());
 app.use(cookieParser());
@@ -28,43 +28,43 @@ app.use(
   })
 );
 
-app.post("/chat", (req, res) => {
-  try {
-    const sendQuestion = req.body.question;
-    const execPython = path.join(__dirname, "bizchat.py");
-    const pythonPath = path.join(__dirname, "bin", "python3");
-    // console.log(sendQuestion, execPython, pythonPath);
+// app.post("/chat", (req, res) => {
+//   try {
+//     const sendQuestion = req.body.question;
+//     const execPython = path.join(__dirname, "bizchat.py");
+//     const pythonPath = path.join(__dirname, "bin", "python3");
+//     // console.log(sendQuestion, execPython, pythonPath);
 
-    //spawn으로 파이썬 스크립트 실행
-    //실행할 파일(bizchat.py) 전달
-    const net = spawn(pythonPath, [execPython, sendQuestion]);
-    let output = "";
+//     //spawn으로 파이썬 스크립트 실행
+//     //실행할 파일(bizchat.py) 전달
+//     const net = spawn(pythonPath, [execPython, sendQuestion]);
+//     let output = "";
 
-    //파이썬 파일 수행 결과를 받아온다
-    net.stdout.on("data", function (data) {
-      output += data.toString();
-    });
+//     //파이썬 파일 수행 결과를 받아온다
+//     net.stdout.on("data", function (data) {
+//       output += data.toString();
+//     });
 
-    net.on("close", (code) => {
-      if (code === 0) {
-        res.status(200).json({ answer: output });
-      } else {
-        res.status(500).send("Something went wrong");
-      }
-    });
+//     net.on("close", (code) => {
+//       if (code === 0) {
+//         res.status(200).json({ answer: output });
+//       } else {
+//         res.status(500).send("Something went wrong");
+//       }
+//     });
 
-    net.stderr.on("data", (data) => {
-      console.error(`stderr: ${data}`);
-    });
-  } catch (error) {
-    // 에러 발생 시 500 상태 코드와 에러 메시지를 반환
-    console.error("Error occurred:", error);
-    res
-      .status(500)
-      .json({ error: "Internal Server Error", message: error.message });
-    res.send(error);
-  }
-});
+//     net.stderr.on("data", (data) => {
+//       console.error(`stderr: ${data}`);
+//     });
+//   } catch (error) {
+//     // 에러 발생 시 500 상태 코드와 에러 메시지를 반환
+//     console.error("Error occurred:", error);
+//     res
+//       .status(500)
+//       .json({ error: "Internal Server Error", message: error.message });
+//     res.send(error);
+//   }
+// });
 
 app.get("/", (request, response) => {
   try {
