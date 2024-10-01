@@ -1,4 +1,5 @@
 const express = require("express"); // express 모듈 불러오기
+const http = require("http");
 const { spawn } = require("child_process");
 const path = require("path");
 const cors = require("cors"); // cors 모듈 불러오기
@@ -9,6 +10,12 @@ require("dotenv").config();
 const PORT = 8080;
 const app = express(); // express 모듈을 사용하기 위해 app 변수에 할당
 app.use(bodyParser.json());
+
+// Express 앱을 HTTP 서버로 감싸기
+const server = http.createServer(app);
+
+// 타임아웃 설정 (예: 5분)
+server.timeout = 300000; // 300,000ms = 300초 = 5분
 
 // app.use(cors());
 app.use(
