@@ -67,7 +67,7 @@ rag_chain = (
   | StrOutputParser()
 )
 
-recieved_question = sys.argv[0]
+recieved_question = sys.argv[1]
 
 answer = rag_chain.stream(recieved_question)
 stream_response(answer)
