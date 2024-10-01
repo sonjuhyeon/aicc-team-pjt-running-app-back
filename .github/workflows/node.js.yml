@@ -38,7 +38,7 @@ jobs:
       # Create and activate Python virtual environment
       - name: Set up Python virtual environment
         run: |
-          python -m venv venv
+          python3 -m venv venv
           source venv/bin/activate
 
       # Install Python dependencies (if you have a requirements.txt file)
