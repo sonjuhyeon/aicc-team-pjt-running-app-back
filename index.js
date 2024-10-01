@@ -57,7 +57,9 @@ app.post("/chat", (req, res) => {
 
 app.get("/", (request, response) => {
   try {
-    response.send("Running Hi Backend Api Server. test python deploy");
+    response.send(
+      "Running Hi Backend Api Server. test python deploy with node"
+    );
   } catch (error) {
     return response.status(500).json({ error: error.message });
   }
