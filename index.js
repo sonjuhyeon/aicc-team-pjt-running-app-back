@@ -56,7 +56,11 @@ app.post("/chat", (req, res) => {
 });
 
 app.get("/", (request, response) => {
-  response.send("Running Hi Backend Api Server. test python deploy");
+  try {
+    response.send("Running Hi Backend Api Server. test python deploy");
+  } catch (error) {
+    return response.status(500).json({ error: error.message });
+  }
 });
 
 app.use(express.json());
