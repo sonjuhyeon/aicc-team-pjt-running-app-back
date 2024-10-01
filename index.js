@@ -17,6 +17,9 @@ const server = http.createServer(app);
 // 타임아웃 설정 (예: 5분)
 server.timeout = 300000; // 300,000ms = 300초 = 5분
 
+app.use(express.json());
+app.use(cookieParser());
+
 // app.use(cors());
 app.use(
   cors({
@@ -72,9 +75,6 @@ app.get("/", (request, response) => {
     return response.status(500).json({ error: error.message });
   }
 });
-
-app.use(express.json());
-app.use(cookieParser());
 
 app.use(require("./routes/getRoutes"));
 app.use(require("./routes/postRoutes"));
