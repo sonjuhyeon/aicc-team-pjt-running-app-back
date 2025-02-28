@@ -44,8 +44,8 @@ CREATE TABLE images_table (
 -- 좋아요 / 즐겨찾기 테이블 생성
 CREATE TABLE like (
     id SERIAL PRIMARY KEY,
-    course TEXT NOT NULL FOREIGN KEY,
-    userId TEXT NOT NULL FOREIGN KEY,
+    course TEXT NOT NULL, -- FOREIGN KEY
+    userId TEXT NOT NULL, -- FOREIGN KEY
     date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
