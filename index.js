@@ -22,7 +22,7 @@ app.use(
 app.get("/", (request, response) => {
   try {
     response.send(
-      "Running Hi Backend Api Server deploy test."
+      "Running Hi Backend Api Server deploy test(https)."
     );
   } catch (error) {
     return response.status(500).json({ error: error.message });
