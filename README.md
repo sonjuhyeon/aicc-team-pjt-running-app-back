@@ -32,17 +32,25 @@
 ---
 
 ### 3. endpoint 설명
-- /delete_course/:courseId -> 코스 삭제
-- /delete_user/:userId -> 유저 삭제
-- /get_user/:userId -> 로그인한 유저정보
-- /get_users -> 전체 유저 정보
-- /get_users_join_course -> 전체코스를 유저정보와 함께 가져오기
-- /get_user_join_course/:userId -> 한명의 유저가 작성한 코스들을 가져오기
-- /get_facilities -> 편의시설 정보
-- /upload_image -> 코스 이미지 업로드
-- /make_course -> 코스 생성
-- /update_course -> 코스 업데이트
-- /update_viewcount -> 조회수 업데이트
+- DELETE Method
+  - /courses/:courseId -> 코스 삭제
+  - /users/:userId -> 유저 삭제
+
+- GET Method
+  - /users/:userId -> 로그인한 유저정보
+  - /users -> 전체 유저 정보
+  - /courses -> 모든 코스 조회
+  - /courses/:course_id -> 특정 코스 조회
+  - /courses?userId={userId} -> 한명의 유저가 작성한 코스들 조회
+  - /facilities -> 편의시설 정보 가져오기
+
+- POST Method
+  - /upload_image -> 코스 이미지 업로드
+  - /make_course -> 코스 생성
+
+- PATCH Method
+  - /update_course -> 코스 업데이트
+  - /update_viewcount -> 조회수 업데이트
 
 ---
 
@@ -53,7 +61,7 @@
 ---
 
 ### 5. 프로젝트 배포
-- [프로젝트 배포 사이트(Running Hi)](https://aiccrunningapp.microdeveloper.co.kr)
+- [프로젝트 배포 사이트(Running Hi)](https://runninghifront.microdeveloper.co.kr)
 - [배포과정 정리](https://velog.io/@homeless_snail/deploy-process1)
 
 ---
@@ -69,7 +77,7 @@ git clone https://github.com/sonjuhyeon/aicc-team-pjt-running-app-back.git
 - back-end 설정
   - 루트 디렉토리에 .env 파일을 생성
   - 아래 환경변수 내용을 입력
-```
+```env
 # DB 정보 입력
 DB_HOST=<>
 DB_USER=<>
@@ -78,8 +86,7 @@ DB_PORT=<>
 DB_NAME=<>
 
 SECRET_KEY=<긴 문자열 아무거나 사용>
-REACT_APP_MY_DOMAIN = "http://localhost:3000"
-KAKAO_API_KEY=<카카오 맵 api key>
+MY_DOMAIN = "http://localhost:3000"
 ```
 - DB에 아래 테이블 생성
 ```sql
@@ -125,7 +132,7 @@ CREATE TABLE images_table (
 
 
 -- 좋아요 / 즐겨찾기 테이블 생성
-CREATE TABLE like (
+CREATE TABLE likes (
     id SERIAL PRIMARY KEY,
     course TEXT NOT NULL,
     user_id TEXT NOT NULL,

@@ -4,9 +4,7 @@ exports.getFacilities = async (req, res) => {
   const fac_type = req.query.fac_type; // 시설 타입
   const values = [];
   // 기본 SQL 쿼리
-  let query = `
-    SELECT * FROM facilities_table
-  `;
+  let query = `SELECT * FROM facilities`;
 
   // fac_type 존재하는 경우 query 추가
   if (fac_type) {

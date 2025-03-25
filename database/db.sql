@@ -1,19 +1,20 @@
--- 유저 테이블 생성
-CREATE TABLE users_table (
+-- 유저 테이블
+CREATE TABLE users (
     user_table_idx SERIAL PRIMARY KEY,
     user_id TEXT UNIQUE NOT NULL,
     user_password_hash TEXT NOT NULL,
     user_name TEXT UNIQUE NOT NULL,
     user_email TEXT UNIQUE NOT NULL,
-    date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    url TEXT DEFAULT 'https://i.namu.wiki/i/M0j6sykCciGaZJ8yW0CMumUigNAFS8Z-dJA9h_GKYSmqqYSQyqJq8D8xSg3qAz2htlsPQfyHZZMmAbPV-Ml9UA.webp'
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    user_url TEXT DEFAULT 'https://i.namu.wiki/i/M0j6sykCciGaZJ8yW0CMumUigNAFS8Z-dJA9h_GKYSmqqYSQyqJq8D8xSg3qAz2htlsPQfyHZZMmAbPV-Ml9UA.webp',
+    user_status BOOLEAN DEFAULT TRUE
 );
 
--- 코스 테이블 생성
-CREATE TABLE running_course_table (
+-- 코스 테이블
+CREATE TABLE running_courses (
     course_id SERIAL PRIMARY KEY,
     course_name VARCHAR(40) NOT NULL,
-    user_id INT NOT NULL, -- FOREIGN KEY
+    user_idx INT NOT NULL, -- FOREIGN KEY
 	content VARCHAR(500) NOT NULL,
 	thumbnail_id TEXT NOT NULL,
     created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -27,31 +28,35 @@ CREATE TABLE running_course_table (
 	is_visible BOOLEAN NOT NULL DEFAULT true,
 	is_private BOOLEAN NOT NULL DEFAULT false,
     center JSON NOT NULL,
-	level INT NOT NULL
+	level INT NOT NULL,
+    FOREIGN KEY (user_idx) REFERENCES users (user_table_idx) -- 외래 키 설정
 );
 
-SELECT * FROM running_course_table;
-
-CREATE TABLE images_table (
+-- 코스 이미지 테이블
+CREATE TABLE course_images (
     img_id SERIAL PRIMARY KEY,
-    course_id INT, -- FOREIGN KEY
-	url TEXT,
+    course_id INT NOT NULL, -- FOREIGN KEY
+	img_url TEXT,
 	is_primary BOOLEAN DEFAULT true,
-	img_created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+	img_created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (course_id) REFERENCES running_courses (course_id) -- 외래 키 설정
 );
 
 
--- 좋아요 / 즐겨찾기 테이블 생성
-CREATE TABLE like (
+-- 좋아요 / 즐겨찾기 테이블
+CREATE TABLE likes (
     id SERIAL PRIMARY KEY,
-    course TEXT NOT NULL, -- FOREIGN KEY
-    userId TEXT NOT NULL, -- FOREIGN KEY
-    date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+    course_id INT NOT NULL, -- FOREIGN KEY
+    user_idx INT NOT NULL, -- FOREIGN KEY
+    date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (course_id) REFERENCES running_courses (course_id), -- 외래 키 설정
+    FOREIGN KEY (user_idx) REFERENCES users (user_table_idx), -- 외래 키 설정
+    CONSTRAINT likes_user_and_course UNIQUE(user_idx, course_id) -- 유저아이디와 코스아이디 조합으로 유니크 설정
 );
 
 
--- 편의 시설 테이블 생성
-CREATE TABLE facilities_table (
+-- 편의 시설 테이블
+CREATE TABLE facilities (
 	fac_id SERIAL PRIMARY KEY,
     fac_name VARCHAR(255) NOT NULL,
     location_detail VARCHAR(500),
@@ -60,9 +65,13 @@ CREATE TABLE facilities_table (
 	fac_type VARCHAR(100) NOT NULL
 );
 
-CREATE TABLE view_table (
+
+-- 코스 조회 수 테이블
+CREATE TABLE course_views (
     view_id SERIAL PRIMARY KEY,
-    user_id TEXT NOT NULL,
+    user_id INT NOT NULL,
     course_id INT NOT NULL,
-    CONSTRAINT user_and_course UNIQUE(user_id, course_id)
+    FOREIGN KEY (course_id) REFERENCES running_courses (course_id), -- 외래 키 설정
+    FOREIGN KEY (user_id) REFERENCES users (user_table_idx), -- 외래 키 설정
+    CONSTRAINT views_user_and_course UNIQUE(user_id, course_id) -- 유저아이디와 코스아이디 조합으로 유니크 설정
 )

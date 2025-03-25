@@ -9,13 +9,13 @@ exports.updateViewCount = async (req, res) => {
 
     // 첫 번째 쿼리: view_table에 데이터 삽입
     await client.query(
-      "INSERT INTO view_table (user_id, course_id) VALUES ($1, $2)",
+      "INSERT INTO course_views (user_id, course_id) VALUES ($1, $2)",
       [user_id, course_id]
     );
 
     // 두 번째 쿼리: running_course_table의 viewcount 업데이트
     await client.query(
-      "UPDATE running_course_table SET viewcount = (SELECT COUNT(*) FROM view_table WHERE course_id = $1) WHERE course_id = $1",
+      "UPDATE running_courses SET viewcount = (SELECT COUNT(*) FROM course_views WHERE course_id = $1) WHERE course_id = $1",
       [course_id]
     );
 
